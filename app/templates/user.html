@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block título %}
+      Ususario
+{% endblock %}
+
+{% block conteudo %}
+    
+    <h1>User: {{ user.usuario }}</h1>
+    
+    {% if current_user.is_authenticated %}
+    <div class="">
+        <small class="">
+                {% if current_user.is_following(user) %}
+                    <button class="btn btn-secondary" id="flw">Following</button>
+                {% elif user != current_user %}
+                    <button class="btn btn-primary" id="flw">Follow</button>
+                {% endif %}
+        </small>
+    </div>
+    {% endif %}
+    <hr>
+    {% for post in posts %}
+    <p>
+        {{ user.usuario }}: <b>{{ post.mensagem }}</b>
+    </p>
+    {% endfor %}
+{% endblock %}

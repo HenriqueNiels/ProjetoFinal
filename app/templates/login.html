@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+   {% block título %}
+      Pagina de Login
+   {% endblock %}    
+
+{% block conteudo %}
+<body class="text-center">
+    <div class="container">
+      <center><img class="mb-4" src ="https://cdn-icons-png.flaticon.com/512/5087/5087579.png" style="width:200px"></center>
+        <h1 class="h3 mb-3 font-weight-normal">
+           Por favor, Faça o seu Log In
+        </h1>
+        <form method="POST" class="form-signin" style="color:whitesmoke">
+         {{ form.hidden_tag() }}
+
+
+         {{form.usuario.label()}}
+         {{form.usuario(class="form-control", placeholder="Informe o Usuario")}}
+
+         
+         {{form.senha.label()}}
+         {{form.senha(class="form-control", placeholder="Informe a Senha")}}
+
+         {{ form.submit(class="btn btn-lg btn-success" )}}
+      </form>
+    </div>
+
+</body>
+{% endblock %}
