@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+<body>
+  <nav id="navC" class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid"> 
+      </button>
+      {% if current_user.is_authenticated %}
+      <div class="navbar-nav ms-auto ereto">
+        <a class="nav-link">Bem vindo {{current_user.usuario}}</a>
+      </div>
+      {% else %}
+      <div class="navbar-nav ms-auto">
+        <a class="nav-link " href="{{url_for('cadastro')}}">Cadastro</a>
+        <a class="nav-link " href="{{url_for('login')}}">Login</a>
+        </div>
+      {% endif %}
+      
+    </div>
+  </nav>
+
+  <!-- QUEM É O FDP QUE PRECISA DE BARRA DE PERSQUISAR??? É SÓ PESQUISAR PELO URL -->
+  <!-- Pensando em virar main smolder e Lux depois dessa merda -sukito -->
+
+  <form method="get" class="row sticky" >
+    <div class="sticky ">
+        <input action="{{ url_for('ForYou') }}" type="text" placeholder="Buscar" name="pesquisa" class="form-control sticky">
+    </div>
+    <div class="sticky">
+        <button type="submit" class="btn sticky mcv" ><img src ="static/search.png"></button>
+    </div>    
+ </form>
+  <!-- End barra de pesquisa -->
+      {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+           {% for category, message in messages %}
+            <div class="alert alert-{{category}} alert-dismissable fade show" role="alert">
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="alert"
+                  aria-label="Close">
+                </button>
+                {{message}}
+              </div>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+
+      {% block conteudo %}
+
+      {% endblock %}
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+      <script src="https://kit.fontawesome.com/6e993e0778.js" crossorigin="anonymous"></script>
+      <script type=text/javascript>
+        $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+      </script>
+    </body>
+    <style>
+         .mcv{
+      z-index: 5;
+      width: 80px;
+      left:660px;
+      top: -2px;
+      position: absolute;
+   }
+
+   .center {
+  margin: auto;
+  width: 50%;
+  padding: 10px;
+  z-index: 5;
+}
+
+ .MM{
+   position: relative;
+ }
+
+ .{
+  
+ }
+
+ 
+
+ 
+        body{
+            background-color:rgb(1, 23, 47);
+            color:white;
+            zoom: 90%;
+        }
+
+        .ereto{
+          left: 1;
+        }
+
+        #navC {
+          position: fixed;
+          width: 100%;
+        }
+    </style>
+        <style>
+          form.sticky {
+            position: -webkit-sticky;
+            position: sticky !important;
+            top: 8px; 
+            width: 50%;
+            margin: auto;
+            right:333px;
+          }
+          </style>
+
+<!-- sidebar -->
+    
+<div id="main" class="top sticky">
+  <a class="openbtn sticky" style="width:10px;position:fixed;"> <img src ="static/logo.png" onclick="openNav()" style="width:40px;position:fixed;cursor:pointer;left:10px;top:10px"> </a>
+</div>
+
+<style>
+  body {
+    font-family: "Lato", sans-serif;
+  }
+
+  body::-webkit-scrollbar {
+  width: 8px;               
+}
+
+body::-webkit-scrollbar-track {
+  background: rgb(0, 0, 0);                 
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: rgb(110, 110, 110);   
+  border-radius: 20px;                      
+  border: 3px solid rgb(0, 0, 0);          
+}
+
+  .top {
+    position: absolute;
+    top:0px;
+  }
+
+  .sidebar {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+  }
+  
+  .sidebar a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+  }
+  
+  .sidebar a:hover {
+    color: #f1f1f1;
+  }
+  
+  .sidebar .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+  }
+  
+  .openbtn {
+    font-size: 20px;
+    cursor: fixed;
+    border: none;
+  }
+  
+  .openbtn:hover {
+    background-color: #444;
+  }
+  
+  #main {
+    transition: margin-left .5s;
+    padding: 16px;
+  }
+  
+
+  @media screen and (max-height: 450px) {
+    .sidebar {padding-top: 15px;}
+    .sidebar a {font-size: 18px;}
+  }
+  </style>
+  </head>
+  <body>
+  
+  <div id="mySidebar" class="sidebar sticky">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+    <a href="/foryou">For You</a>
+    <a href="/comunidades">Comunidades</a>
+    <a href="/user/{{current_user.usuario}}">Perfil</a>
+    <a class="nav-link " href="{{url_for('page_logout')}}">Logout</a>
+  </div>
+  
+  
+  
+  <script>
+  function openNav() {
+    document.getElementById("mySidebar").style.width = "250px";
+    document.getElementById("main").style.marginLeft = "0px";
+  }
+  
+  function closeNav() {
+    document.getElementById("mySidebar").style.width = "0";
+    document.getElementById("main").style.marginLeft= "0";
+  }
+  </script>
+
+    </html>

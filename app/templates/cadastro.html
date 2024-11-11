@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastre-se!</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+
+    <body class="text-container">
+        <center><img class="mb-4" src ="static/logo.png" style="width:200px"></center>
+        <div class=" card container">
+            <h1 class="h3 mb-3 font-weight-normal">
+                Por favor, crie sua conta
+            </h1>
+            <form method="POST" class="form-register" style="color:azure;">
+                {{ form.hidden_tag() }}
+
+
+                <br>
+                {{form.usuario(class="form-control", placeholder="Informe o UserName")}}
+
+                <br>
+                {{form.email(class="form-control", placeholder="Informe o Email")}}
+
+                <br>
+                {{form.senha1(class="form-control", placeholder="Informe a Senha")}}
+
+                <br>
+                {{form.senha2(class="form-control", placeholder="Confirme a Senha")}}
+                <br>
+
+                <div class="d-grid">
+                {{form.submit (class="btn btn-lg btn-dark")}}
+                </div>
+                <br>
+
+                <div class="checkbox mb-3" style="color:black">
+                    <center><h5>Voce já possui cadastro?</h5>
+                    <a class="btn btn-sm btn-dark" href="{{url_for('login')}}">Login</a></center>
+                    </div>
+                    
+                </div>
+
+            </form>
+        </div>
+
+<style>
+    .card {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  width: 40%;
+}
+
+.container {
+  padding: 2px 16px;
+  width: 40%;
+}
+
+body{
+   background-image: url("static/minecraft.png");
+   background-size: cover;         
+}
+</style>
+
+<center><footer style="color: white; padding-top: 5px;">
+    Feito por Equipe dos nerds da "Turma do cabecinha" 2921 SENAI
+</footer></center>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/6e993e0778.js" crossorigin="anonymous"></script>
+<script type=text/javascript>
+  $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+</script>
+</body>
+</html>

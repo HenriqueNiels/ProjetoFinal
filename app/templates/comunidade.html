@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+    {% block título %}
+        Post
+    {% endblock %}  
+
+{% block conteudo %}
+<a class="btn btn-lg china" href="{{url_for('ForYou')}}"> ⬅️</a>
+    <div class="mt-4">
+    <h4>{{comunidade.nome}}</h4>
+    {% if follows != False %}
+    <a class="btn btn-danger" href="/comunidade/{{comunidade.id}}/unfollow">Unfollow</a>
+    <hr>
+    <form method="POST" class="form-signin" style="color:whitesmoke">
+        {{form.csrf_token}}
+
+        {{form.mensagem.label()}}
+        {{form.mensagem(class="form-control")}}
+     <div class="left">
+        {{form.btnSubmit(class="btn btn-primary btn-sm mt-3")}}
+        </div>
+  </form>
+    {% else %}
+    <form method="POST" type="submit" style="color:whitesmoke">
+        {{ form.btnSubmit(class="btn btn-lg btn-success" )}}
+    </form>
+    {% endif %}
+
+    </div>
+
+    <div class="row">
+        </div>
+        <div class="col-12 mt-3">
+            
+        </div>
+        
+        <div class="col-12 mt-4 border rounded shadow">
+            <h3>Posts da comunidade</h3>
+            <hr>
+            {% if comunidade.posts != null %}
+                {% for c in comunidade.posts %}
+                <p>
+                    <a class="nav-link" href="/user/{{users[c.user_id-1].usuario}}">{{users[c.user_id-1].usuario}} há {{(data-c.data_criacao)}} hora(s) </a>
+                    <br>
+                    <a style="color:white; text-decoration: none;" href="/post/{{c.id}}">{{c.mensagem}}</a>
+                    {{c.like_count()}}
+                    {% if c.isliked(current_user.id) != False %}
+                    <a class="btn btn-lg btn-danger" href="/post/{{c.id}}/dislike">DISLIKE</a>
+                        
+                    {% else %}
+                    <a class="btn btn-lg btn-danger" href="/post/{{c.id}}/like">LIKE</a>
+                    {% endif %}
+                </p>
+                <hr>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+
+<style>
+ .china{
+    right: 1px;
+    position: absolute;
+    z-index: -1;
+ }
+ .will{
+    position: absolute;
+    top: 100px;
+ }
+       
+</style>
+
+{% endblock %}

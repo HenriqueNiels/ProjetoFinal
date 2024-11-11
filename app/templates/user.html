@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block título %}
+      Ususario
+{% endblock %}
+
+{% block conteudo %}
+
+<div>
+    <a class="btn btn-lg china" href="{{url_for('ForYou')}}"> ⬅️ </a>
+</div>
+<div>
+    <img src ="static/placeholder.png">
+</div>
+    <h1 class="wapol">{{ user.usuario }}</h1>
+    <a>{{ flwcount }} seguidores</a>
+    {% if current_user.is_authenticated %}
+    <div class="">
+        <small class="">     
+            {% if user != current_user %}
+                {% if follows != False %}
+                <a class="btn btn-lg btn-danger" href="/user/{{user.usuario}}/unfollow">Unfollow</a>
+                {% else %}
+                <form method="POST" type="submit" style="color:whitesmoke">
+                    {{ follow.btnSubmit(class="btn btn-lg btn-success" )}}
+                </form>
+                {% endif %}
+            {% endif %}
+        </small>
+    </div>
+    {% endif %}
+    
+    <hr>
+    {% if posts != null %}
+        {% for post in posts %}
+        <p>
+            {{ user.usuario }}: <a style="word-break:break-all; word-wrap:break-word; color:white; text-decoration: none;" href="/post/{{post.id}}">{{ post.mensagem }}</a>
+            {% if post.isliked(current_user.id) != False %}
+            <a class="btn btn-lg btn-danger" href="/post/{{post.id}}/dislike">DISLIKE</a>
+                  
+            {% else %}
+            <a class="btn btn-lg btn-danger" href="/post/{{post.id}}/like">LIKE</a>
+            {% endif %}
+            {{post.like_count()}}
+        </p>
+        {% endfor %}
+    {% endif %}
+
+<style>
+ .china{
+    right: 1px;
+    top:50px;
+    position: absolute;
+ }
+
+ .wapol{
+    padding-top: 200px;
+ }
+
+</style>
+
+
+{% endblock %}

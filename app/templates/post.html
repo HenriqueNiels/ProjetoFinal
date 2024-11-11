@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+
+    {% block título %}
+        Post
+    {% endblock %}  
+
+{% block conteudo %}
+
+<div class="brutal"></div>
+<div class="💔"></div>
+
+    <div class="row mt-4">
+<h3></h3>
+    </div>
+
+    <div>
+        <div>
+            <a class="btn btn-lg china" href="{{url_for('ForYou')}}"> ⬅️</a>
+            </div>
+        <div class="container ">
+            <center><div class="col-7 p-4 shadow b">
+                        {{post.mensagem}}
+                    </div>
+            <div class="right">
+            <br>
+            {{post.like_count()}}
+            {% if isliked != False %}
+            <a class="btn btn-danger" href="/post/{{post.id}}/dislike">DISLIKE</a>
+                
+            {% else %}
+            <a class="btn btn-danger" href="/post/{{post.id}}/like">LIKE</a>
+            {% endif %}
+            </div>
+            </div>
+        </div><center>
+            
+            <div class="col-6 mt-3 shadow p-3 b">
+            <form action="" method="post" class="row p-3 ">
+                {{form.csrf_token}}
+                Comentar
+                {{form.comentario(class="form_control")}}
+    
+                {{form.btnSubmit(class="btn btn-primary col-12 mt-3")}}
+            </form>
+        </div>
+
+
+
+            {% for c in post.comentarios %}
+            <p>
+                <div class=" right col-6 mt-4 border rounded shadow p-3 b">
+                <!-- <b>Usuario: </b> --> <a style="color:white; text-decoration: none;" href="/user/{{users[c.user_id-1].usuario}}">{{users[c.user_id-1].usuario}}</a><br>
+                <hr class="e">
+                {{c.comentario}}
+                </div>
+            </p>
+            {% endfor %}
+        </div>
+    </div>
+
+    <style>
+        .china{
+           position: absolute;
+        }
+
+        .a {
+      text-align: center;
+}
+        
+        .b {
+        text-align: left;
+        word-break: break-all;
+}
+        
+        .c {
+        text-align: right;
+} 
+        
+        .d {
+        text-align: justify;
+} 
+
+        .e{
+        width: 50px;
+
+}
+        .zec {
+        color:white;
+        text-decoration: none !important;
+        }
+        .no_meu_cu{
+            box-shadow: 20px;
+            color:green;
+        }
+
+        .brutal {
+  border-left: 6px solid rgba(0, 0, 0, 0.518);
+  height: 100%;
+  position: fixed;
+  left: 77%;
+  margin-left: -3px;
+  top: 0;
+  z-index: -1;
+}
+
+.💔 {
+  border-left: 6px solid rgba(0, 0, 0, 0.518);
+  height: 100%;
+  position:fixed;
+  right: 77%;
+  margin-left: -3px;
+  top: 0;
+  z-index: -1;
+}
+
+.likebolsonarista{
+    left: 500px;
+    position: absolute;
+}
+       </style>
+
+
+{% endblock %}

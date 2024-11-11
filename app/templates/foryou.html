@@ -1,0 +1,271 @@
+{% extends 'base.html' %}
+
+   {% block título %}
+      For You
+   {% endblock %}    
+
+{% block conteudo %} 
+
+
+<body class="text-center">
+
+<!-- nao sei oq é mas funciona -->
+<div class="grid-container">
+<div class="brutal"></div>
+<div class="💔"></div>
+<div class="container">
+        <form method="POST" class="form-signin" style="color:whitesmoke"> 
+
+            {{form.csrf_token}}
+         
+            {{form.mensagem.label()}}
+            {{form.mensagem(class="form-control")}}
+         <div class="left">
+            <br>
+            <input type="image" src ="static/feather.png">
+         </div>
+      </form>      
+</div>
+
+      <div class="vr" style="color:rgb(1, 23, 47);"></div>
+
+    <center><table class="item">
+      {% if posts != null %}
+      <th class="penis">{% for post in posts %}
+         <p>
+            <div class="post2" style="text-decoration: none;" href="/user/{{users[post.user_id-1].usuario}} left">{{users[post.user_id-1].usuario}}</div>
+            <div class="bosta volta_comigo_camile"></div>
+               <div class="post BotLane ">
+                  <a style="color:white; text-decoration: none;" href="/post/{{post.id}}">{{post.msg_resumo()}}</a>
+               </div>
+
+               {{post.like_count()}}
+               {% if post.isliked(current_user.id) != False %}
+               <a href="/post/{{post.id}}/dislike">
+               <input type="image" src ="static/like.png">  </a>
+                  
+               {% else %}
+               <a href="/post/{{post.id}}/like">
+               <input type="image" src ="static/deslike3.png"></a>
+               {% endif %}
+            </div> 
+         </p>
+         <hr>
+      {% endfor %}</th>
+   {% endif %}
+      </table></center>
+
+
+
+<!-- side bar comunidades --> <!-- onde krl isso ta??? tipo real nao existe na mesma dimensao que a nossa -->
+<div id="right-sidebar-container"
+   <aside class="flex flex-col py-md box-border right">
+      <aside class="bg-neutral-background-weak rounded-[8px] pb-2xs pt-xs mb-md" >
+         <div>
+            <h3 class="w3-bar-item">Comunidades em alta</h3>
+            <a href="#" class="w3-bar-item w3-button" style="color:white; text-decoration: none;">Link 1</a>
+            <br>
+            <a href="#" class="w3-bar-item w3-button" style="color:white; text-decoration: none;">Link 2</a>
+            <br>
+            <a href="#" class="w3-bar-item w3-button" style="color:white; text-decoration: none;">Link 3</a>
+         </div>
+      </aside>
+   </aside>
+</div>
+</div>
+<style>
+   .left{
+      left: 10px;
+   }
+
+.Penis{
+   width: 40%;
+}
+
+   .volta{ 
+  left: 10px;
+}
+
+.BotLane {
+   padding-bottom: 25px;
+}
+ .volta_comigo_camile{
+   position: absolute;
+   z-index: -1;
+   background-color: rgb(0, 30, 58);
+   border: 1px;
+ }  
+
+ .volta_comigo_larissa{
+   z-index: 1;
+   left: 50;
+ }  
+
+ .bosta {
+   width: 500px; 
+   height: 120px; 
+   border-radius: 0px; 
+   background-color: rgb(1, 23, 47); 
+}
+
+ .container {
+   width: 600px; 
+   height: 120px; 
+   border-radius: 50px; 
+   background-color: rgb(1, 23, 47); 
+   padding-top: 30px;
+}
+.post {
+   width: 550px; 
+   height: 40%; 
+   word-break: break-all;
+   text-justify:auto;
+}
+
+.post2 {
+   width: 700px !important;
+   height: 50px;
+   position: static  ;
+}
+.user {
+   width: 60px; 
+   height: 120px; 
+}
+   .right {
+   position: absolute;
+   right: 1px;
+   padding-right: 2%;
+}  
+   .brutal {
+  border-left: 6px solid rgba(0, 0, 0, 0.518);
+  height: 100%;
+  position: fixed;
+  left: 77%;
+  margin-left: -3px;
+  top: 0;
+  z-index: -1;
+}
+
+.💔 {
+  border-left: 6px solid rgba(0, 0, 0, 0.518);
+  height: 100%;
+  position:fixed;
+  right: 77%;
+  margin-left: -3px;
+  top: 0;
+  z-index: -1;
+}
+
+</style>
+
+<!-- reddit algo pqp -->
+<style>
+
+   aside {
+    display: block;
+    unicode-bidi: isolate;
+}
+
+   .pt-xs {
+    padding-top: .5rem;
+}
+
+   .pb-2xs {
+    padding-bottom: .25rem;
+}
+
+   .bg-neutral-background-weak {
+    background-color: var(--color-neutral-background-weak);
+}
+
+   .rounded-\[8px\] {
+    border-radius: 8px;
+}
+
+.mb-md {
+    margin-bottom: 1rem;
+}
+
+
+
+.flex {
+    display: flex;
+}
+
+.flex-col {
+    flex-direction: column;
+}
+
+.py-md {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.box-border {
+    box-sizing: border-box;
+}
+
+
+.min-w-\[316px\] {
+    min-width: 316px;
+}
+
+.w-\[316px\] {
+    width: 316px;
+}
+
+.hidden {
+    display: none;
+}
+
+div {
+    display: block;
+    unicode-bidi: isolate;
+}
+
+body{
+   zoom: 90%;
+}
+
+/* tentativa de Grid 1 */
+
+.grid- {
+  display: grid;
+  column-gap: 50px;
+  grid-template-columns: auto auto auto;
+  background-color: #2196F3;
+  padding: 10px;
+  padding-left: 30%;
+}
+
+.grid-item {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  padding: 20px;
+  font-size: 30px;
+  text-align: center;
+}
+/* tentativa de grid 2*/
+
+.grid-container {
+  display: grid;
+  grid-template-rows: 70px 100px 100px 100px 100px 100px;
+}
+
+.item {
+  border: 10px none #00f4bf;
+  text-align: left;
+  font-size: 1.25em;
+  font-weight: normal;
+}
+
+
+
+</style>
+      
+</body>
+
+</div>
+</div>
+</body>
+{% endblock %}

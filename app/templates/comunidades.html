@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block título %}
+      Criar ou Participar de Comunidades
+{% endblock %}    
+
+{% block conteudo %}
+
+<div class="right">
+<br>
+  <center><a class="btn btn-lg btn-primary" href="{{url_for('comunidades_criar')}}">criar comunidade</a><center>
+<br>
+{% for i in comunidades %}
+<a style="color:white; text-decoration: none;" href="/comunidade/{{i.id}}">{{i.nome}}</a>
+<hr>
+{% endfor %}
+</div>
+  
+
+<!-- agora foi ou é forca
+ que bizarro os botao parece minhas bola no frio -->
+
+<style>
+.foda {
+  display: flex;
+  justify-content: space-around;
+  width: 300px;
+}      
+</style>
+
+{% endblock %}
+
+
