@@ -83,7 +83,7 @@ class Comunidade(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     data_criacao = db.Column(db.DateTime, default=datetime.now())
     nome = db.Column(db.String, nullable=True)
-    capa = db.Column(db.LargeBinary, nullable=True)
+    capa = db.Column(db.LargeBinary, nullable=False)
     banner = db.Column(db.LargeBinary, nullable=True)
     criador_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
     posts = db.relationship('Post', backref='comunidade', lazy=True)
