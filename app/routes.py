@@ -263,7 +263,7 @@ def EditPfp(usuario):
         db.session.commit()
         return redirect('/user/'+str(current_user.usuario))
 
-    return render_template('teste.html',form=form, usuario=usuario)
+    return render_template('enviar_img.html',form=form, usuario=usuario)
 
 @app.route('/user/<usuario>/changebanner', methods=['GET', 'POST'])
 @login_required
@@ -277,7 +277,7 @@ def EditBanner(usuario):
         db.session.commit()
         return redirect('/user/'+str(current_user.usuario))
 
-    return render_template('teste.html',form=form, usuario=usuario)
+    return render_template('enviar_img.html',form=form, usuario=usuario)
 
 
     
