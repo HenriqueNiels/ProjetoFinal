@@ -262,7 +262,6 @@ def EditPfp(usuario):
         db.session.add(user)
         db.session.commit()
         return redirect('/user/'+str(current_user.usuario))
-
     return render_template('enviar_img.html',form=form, usuario=usuario)
 
 @app.route('/user/<usuario>/changebanner', methods=['GET', 'POST'])
@@ -276,8 +275,31 @@ def EditBanner(usuario):
         db.session.add(user)
         db.session.commit()
         return redirect('/user/'+str(current_user.usuario))
-
     return render_template('enviar_img.html',form=form, usuario=usuario)
+
+@app.route('/comunidade/<int:id>/changecapa', methods=['GET', 'POST'])
+@login_required
+def Editcapa_com(id):
+    comunidade = Comunidade.query.get(id)
+    form = Changepfp()
+    if form.validate_on_submit():
+        comunidade.capa = form.novapfp.data.read()
+        db.session.add(comunidade)
+        db.session.commit()
+        return redirect('/comunidade/'+str(id))
+    return render_template('enviar_img.html',form=form)
+
+@app.route('/comunidade/<int:id>/changebanner', methods=['GET', 'POST'])
+@login_required
+def Editbanner_com(id):
+    comunidade = Comunidade.query.get(id)
+    form = Changepfp()
+    if form.validate_on_submit():
+        comunidade.banner = form.novapfp.data.read()
+        db.session.add(comunidade)
+        db.session.commit()
+        return redirect('/comunidade/'+str(id))
+    return render_template('enviar_img.html',form=form)
 
 
     

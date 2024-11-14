@@ -27,6 +27,9 @@
                     {{ follow.btnSubmit(class="btn btn-lg btn-success" )}}
                 </form>
                 {% endif %}
+            {% else %}
+            <a class="btn btn-lg btn-danger" href="/user/{{user.usuario}}/changepfp">Mudar pfp</a>
+            <a class="btn btn-lg btn-danger" href="/user/{{user.usuario}}/changebanner">Mudar Banner</a>
             {% endif %}
         </small>
     </div>

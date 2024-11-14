@@ -10,6 +10,12 @@
     <img src='../comunidade/capa/{{comunidade.id}}'>
     <img src='../comunidade/banner/{{comunidade.id}}'>
     <h4>{{comunidade.nome}}</h4>
+    {% if current_user.id == comunidade.criador_id %}
+    <a class="btn btn-lg btn-danger" href="/comunidade/{{comunidade.id}}/changecapa">Mudar capa</a>
+    <a class="btn btn-lg btn-danger" href="/comunidade/{{comunidade.id}}/changebanner">Mudar Banner</a>
+    {% else %}
+
+    {% endif %}
     {% if follows != False %}
     <a class="btn btn-danger" href="/comunidade/{{comunidade.id}}/unfollow">Unfollow</a>
     <hr>

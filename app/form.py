@@ -100,7 +100,7 @@ class ComunidadeForm(FlaskForm):
         post = Comunidade (
              nome=self.nome.data,
              capa=self.capa.data.read(),
-             banner=self.capa.data.read(),
+             banner=self.banner.data.read(),
              criador_id=criador_id
              
         )
