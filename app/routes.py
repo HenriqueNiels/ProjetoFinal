@@ -2,7 +2,7 @@ from flask import render_template, redirect, url_for, flash, request, jsonify, R
 from app import app
 from sqlalchemy import Select
 from app.models import User, Post, PostComentarios, Followers, Comunidade,Follow_comunidade, Like
-from app.form import CadastroForm, LoginForm, PostForm, PostComentarioForm, FollowForm, UnfollowForm, LikeForm, ComunidadeForm,PostComunidadeForm, FollowComunidadeForm
+from app.form import CadastroForm, LoginForm, PostForm, PostComentarioForm, FollowForm, UnfollowForm, LikeForm,Changepfp, ComunidadeForm,PostComunidadeForm, FollowComunidadeForm
 from app import db
 from flask_login import login_user, current_user, login_required, logout_user
 from sqlalchemy import select, update
@@ -237,14 +237,47 @@ def com_capa_img(id):
     
     return Response(img, mimetype='PNG')
 
-@app.route('/user/<int:id>/changepfp', methods=['GET', 'POST'])
+@app.route('/user/<usuario>/banner')
+def user_banner_img(usuario):
+    user = User.query.filter_by(usuario=usuario).first()
+    img = user.banner
+    
+    return Response(img, mimetype='PNG')
+
+@app.route('/user/<usuario>/profile')
+def user_profile_img(usuario):
+    user = User.query.filter_by(usuario=usuario).first()
+    img = user.profile_pic
+    
+    return Response(img, mimetype='PNG')
+
+@app.route('/user/<usuario>/changepfp', methods=['GET', 'POST'])
 @login_required
-def ChangePFP(id):
-    post = Post.query.get(id)
-    user = db.session.query(User).filter(User.id==Post.user_id,Post.id==post.id).first()
-    unfollow = db.session.query(Like).filter(Like.user_id==current_user.id,Like.post_id==post.id).first()
-    db.session.delete(unfollow)
-    db.session.commit()
-    return redirect('/user/'+str(user.usuario))
+def EditPfp(usuario):
+    usuario=current_user.usuario
+    user = User.query.get(current_user.id)
+    form = Changepfp()
+    if form.validate_on_submit():
+        user.profile_pic = form.novapfp.data.read()
+        db.session.add(user)
+        db.session.commit()
+        return redirect('/user/'+str(current_user.usuario))
+
+    return render_template('teste.html',form=form, usuario=usuario)
+
+@app.route('/user/<usuario>/changebanner', methods=['GET', 'POST'])
+@login_required
+def EditBanner(usuario):
+    usuario=current_user.usuario
+    user = User.query.get(current_user.id)
+    form = Changepfp()
+    if form.validate_on_submit():
+        user.banner = form.novapfp.data.read()
+        db.session.add(user)
+        db.session.commit()
+        return redirect('/user/'+str(current_user.usuario))
+
+    return render_template('teste.html',form=form, usuario=usuario)
+
 
     

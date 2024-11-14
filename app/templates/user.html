@@ -12,6 +12,8 @@
 <div>
     <img src ="static/placeholder.png">
 </div>
+    <img src='/user/{{user.usuario}}/profile'>
+    <img src='/user/{{user.usuario}}/banner'>
     <h1 class="wapol">{{ user.usuario }}</h1>
     <a>{{ flwcount }} seguidores</a>
     {% if current_user.is_authenticated %}

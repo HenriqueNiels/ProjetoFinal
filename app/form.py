@@ -127,6 +127,14 @@ class LikeForm(FlaskForm):
         db.session.add(like)
         db.session.commit()
 
+class Changepfp(FlaskForm):
+     novapfp = FileField()
+
+     btnSubmit = SubmitField('Enviar')
+
+     
+     
+
 
         
     
