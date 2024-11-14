@@ -9,13 +9,14 @@
 <div>
     <a class="btn btn-lg china" href="{{url_for('ForYou')}}"> ⬅️ </a>
 </div>
-<div>
-    <img src ="static/placeholder.png">
+<div >
+    <img class="container-img" src='/user/{{user.usuario}}/banner'>
 </div>
-    <img src='/user/{{user.usuario}}/profile'>
-    <img src='/user/{{user.usuario}}/banner'>
-    <h1 class="wapol">{{ user.usuario }}</h1>
-    <a>{{ flwcount }} seguidores</a>
+<div>
+    <img style="position: absolute;" class="pfp" src='/user/{{user.usuario}}/profile'>
+    <h1 style="border: solid;" src='/user/{{user.usuario}}/profile' class="wapol">{{ user.usuario }} {{ flwcount }} seguidores</h1>
+
+</div>
     {% if current_user.is_authenticated %}
     <div class="">
         <small class="">     
@@ -28,8 +29,8 @@
                 </form>
                 {% endif %}
             {% else %}
-            <a class="btn btn-lg btn-danger" href="/user/{{user.usuario}}/changepfp">Mudar pfp</a>
-            <a class="btn btn-lg btn-danger" href="/user/{{user.usuario}}/changebanner">Mudar Banner</a>
+            <a  style="border: solid; padding-top: 100px;" class="btn btn-lg btn-danger" href="/user/{{user.usuario}}/changepfp">Mudar pfp</a>
+            <a  style="border: solid; padding-top: 100px;" class="btn btn-lg btn-danger" href="/user/{{user.usuario}}/changebanner">Mudar Banner</a>
             {% endif %}
         </small>
     </div>
@@ -59,9 +60,25 @@
  }
 
  .wapol{
-    padding-top: 200px;
+    padding-left: 100px;
  }
 
+
+ .container-img {
+  max-width: 1600px;
+  max-height: 400px;
+  min-width: 1358px;
+  min-height: 400px;
+}
+
+.pfp {
+   border: solid ;
+   max-width: 120px;
+   max-height: 120px;
+   min-width: 120px;
+   min-height: 120px;
+   border-radius: 60px;
+}
 </style>
 
 

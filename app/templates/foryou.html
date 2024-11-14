@@ -23,12 +23,7 @@
             {{form.mensagem(class="form-control")}}
             {{form.img.label()}}
             {{form.img(class="form-control")}}
-            
-         <div class="left">
-            <br>
-            <input type="image" src ="static/feather.png">
-         </div>
-      </form>      
+               
 </div>
 
       <div class="vr" style="color:rgb(1, 23, 47);"></div>
@@ -41,9 +36,9 @@
             <div class="bosta volta_comigo_camile"></div>
                <div class="post BotLane ">
                   <a style="color:white; text-decoration: none;" href="/post/{{post.id}}">{{post.msg_resumo()}}</a>
-                  {% if post.img != null %}
+                  {% if post.img != None %}
                   <div>
-                  <img src='/imagem/{{post.id}}'>   
+                  <center><img class ='postimg'src='../imagem/{{post.id}}'></center>
                   </div>
                   
                   {% endif %}
@@ -71,14 +66,35 @@
 <div id="right-sidebar-container"
    <aside class="flex flex-col py-md box-border right">
       <aside class="bg-neutral-background-weak rounded-[8px] pb-2xs pt-xs mb-md" >
+
          <div>
             <h3 class="w3-bar-item">Comunidades em alta</h3>
-            <a href="#" class="w3-bar-item w3-button" style="color:white; text-decoration: none;">Link 1</a>
+            {% if qtd_comunidades >= 3 %}
+            <img class='postcomuna'src='../comunidade/capa/{{comunidades[0].id}}'>
+            <a href="/comunidade/{{comunidades[0].id}}" class="resumo border comunatxt w3-bar-item w3-button" style="color:white; text-decoration: none; z-index: -2;">{{comunidades[0].nome}}</a>
             <br>
-            <a href="#" class="w3-bar-item w3-button" style="color:white; text-decoration: none;">Link 2</a>
             <br>
-            <a href="#" class="w3-bar-item w3-button" style="color:white; text-decoration: none;">Link 3</a>
+            <img class='postcomuna'src='../comunidade/capa/{{comunidades[1].id}}'>
+            <a href="/comunidade/{{comunidades[1].id}}" class="border resumo w3-bar-item w3-button" style="color:white; text-decoration: none; z-index: -2;">{{comunidades[1].nome}}</a>
+            <br>
+            <br>
+            <img class='postcomuna'src='../comunidade/capa/{{comunidades[2].id}}'>
+            <a href="/comunidade/{{comunidades[2].id}}" class=" border resumo w3-bar-item w3-button" style="color:white; text-decoration: none; z-index: -200;">{{comunidades[2].nome}}</a>
+            {% elif qtd_comunidades == 2 %}
+            <img class='postcomuna'src='../comunidade/capa/{{comunidades[0].id}}'>
+            <a href="/comunidade/{{comunidades[0].id}}" class="resumo border comunatxt w3-bar-item w3-button" style="color:white; text-decoration: none; z-index: -2;">{{comunidades[0].nome}}</a>
+            <br>
+            <br>
+            <img class='postcomuna'src='../comunidade/capa/{{comunidades[1].id}}'>
+            <a href="/comunidade/{{comunidades[1].id}}" class="border resumo w3-bar-item w3-button" style="color:white; text-decoration: none; z-index: -2;">{{comunidades[1].nome}}</a>
+            {% elif qtd_comunidades == 1 %}
+            <img class='postcomuna'src='../comunidade/capa/{{comunidades[0].id}}'>
+            <a href="/comunidade/{{comunidades[0].id}}" class="resumo border comunatxt w3-bar-item w3-button" style="color:white; text-decoration: none; z-index: -2;">{{comunidades[0].nome}}</a>
+            {% elif qtd_comunidades == 0 %}
+
+            {% endif %}
          </div>
+
       </aside>
    </aside>
 </div>
@@ -94,6 +110,10 @@
 
    .volta{ 
   left: 10px;
+}
+
+.comunas{
+   z-index: 1;
 }
 
 .BotLane {
@@ -137,6 +157,38 @@
    height: 50px;
    position: static  ;
 }
+
+.postimg {
+   max-width: 500px;
+   max-height: 500px;
+   min-width: 200px;
+   min-height: 200px;
+}
+.postcomuna {
+   max-width: 70px;
+   max-height: 70px;
+   min-width: 70px;
+   min-height: 70px;
+   border-radius: 60px;
+}
+
+.resumo {
+   overflow: hidden;
+   word-wrap: break-word;
+   word-break: break-all;
+   text-overflow: ellipsis;
+   display: -webkit-box;
+   -webkit-box-orient: vertical;
+   -webkit-line-clamp: 3;
+   height: 20px;
+   width: 175px;
+}
+
+.comunatxt{
+   text-transform: uppercase;
+   text
+}
+
 .user {
    width: 60px; 
    height: 120px; 
@@ -259,7 +311,7 @@ body{
 
 .grid-container {
   display: grid;
-  grid-template-rows: 70px 100px 100px 100px 100px 100px;
+  grid-template-rows: 70px 100px 100px 100px 100px 100px;      
 }
 
 .item {

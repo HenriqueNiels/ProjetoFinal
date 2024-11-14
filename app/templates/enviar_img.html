@@ -1,11 +1,10 @@
 {% extends 'base.html' %}
 
-{% block título %}
-      Criar ou Participar de Comunidades
-{% endblock %}    
-
 {% block conteudo %}
     <form method="post" enctype="multipart/form-data" class="form-signin" style="color:whitesmoke">
+        <br>
+        <br>
+        <br>
         {{form.csrf_token}}
          
         {{form.novapfp.label()}}

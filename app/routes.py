@@ -71,12 +71,15 @@ def ForYou():
     posts.sort(key=attrgetter('id'))
     posts.reverse()
     users = db.session.query(User).order_by(User.id).all()
+    comunidades = Comunidade.query.order_by(Comunidade.data_criacao).all()
+    comunidades.reverse()
+    qtd_comunidades = len(comunidades)
 
     form = PostForm()
     if form.validate_on_submit():
         form.save(current_user.id)
         return redirect(url_for('ForYou'))
-    return render_template('foryou.html',  form=form, posts = posts, users = users, pesquisa=pesquisa)
+    return render_template('foryou.html',  form=form, posts = posts, users = users, pesquisa=pesquisa, comunidades=comunidades, qtd_comunidades=qtd_comunidades)
 
 @app.route('/post/<int:id>', methods=['GET', 'POST'])
 @login_required

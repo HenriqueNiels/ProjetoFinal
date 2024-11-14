@@ -34,17 +34,23 @@ class PostForm(FlaskForm):
      img = FileField()
      btnSubmit = SubmitField()
      
-
      def save(self, user_id):
-        if self.img.data:
-            
-            post = Post(
-                mensagem=self.mensagem.data,
-                img=self.img.data.read(),
-                user_id=user_id
-            )
-        db.session.add(post)
-        db.session.commit()
+        if self.img.data:  
+          post = Post(
+               mensagem=self.mensagem.data,
+               img=self.img.data.read(),
+               user_id=user_id
+          )
+          db.session.add(post)
+          db.session.commit()
+
+        else:
+          post = Post(
+          mensagem=self.mensagem.data,
+          user_id=user_id
+          )
+          db.session.add(post)
+          db.session.commit()
 
 class PostComunidadeForm(FlaskForm):
      mensagem = StringField('Faça um Post', validators=[DataRequired()])
