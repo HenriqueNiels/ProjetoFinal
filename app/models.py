@@ -25,6 +25,8 @@ class Followers (db.Model, UserMixin):
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True,autoincrement=True)
     usuario = db.Column(db.String(length=30), nullable=False, unique=True)
+    profile_pic = db.Column(db.LargeBinary, nullable=True)
+    banner = db.Column(db.LargeBinary, nullable=True)
     email = db.Column(db.String(length=50), nullable=False, unique=True)
     senha = db.Column(db.String(length=60), nullable=False)
     posts = db.relationship('Post', backref='user', lazy=True)
@@ -58,6 +60,8 @@ class Post(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
     comentarios = db.relationship('PostComentarios', backref='post', lazy=True)
     comunidade_id = db.Column(db.Integer, db.ForeignKey('comunidade.id'), nullable=True)
+    img = db.Column(db.LargeBinary, nullable=True)
+    mimetype = db.Column(db.Text, nullable=True)
 
     def msg_resumo(self):
         return f"{self.mensagem[:250]}"
@@ -79,6 +83,8 @@ class Comunidade(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     data_criacao = db.Column(db.DateTime, default=datetime.now())
     nome = db.Column(db.String, nullable=True)
+    capa = db.Column(db.LargeBinary, nullable=True)
+    banner = db.Column(db.LargeBinary, nullable=True)
     criador_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
     posts = db.relationship('Post', backref='comunidade', lazy=True)
 

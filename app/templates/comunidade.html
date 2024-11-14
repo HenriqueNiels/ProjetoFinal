@@ -7,6 +7,8 @@
 {% block conteudo %}
 <a class="btn btn-lg china" href="{{url_for('ForYou')}}"> ⬅️</a>
     <div class="mt-4">
+    <img src='../comunidade/capa/{{comunidade.id}}'>
+    <img src='../comunidade/banner/{{comunidade.id}}'>
     <h4>{{comunidade.nome}}</h4>
     {% if follows != False %}
     <a class="btn btn-danger" href="/comunidade/{{comunidade.id}}/unfollow">Unfollow</a>

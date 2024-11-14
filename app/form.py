@@ -6,7 +6,6 @@ from app.models import User, Post, PostComentarios, Followers, Comunidade, Follo
 from app import db
 from flask_login import current_user
 import os
-from werkzeug.utils import secure_filename
 
 class CadastroForm(FlaskForm):
     usuario = StringField(label='Username:', validators=[Length(min=2, max=30), DataRequired()])
@@ -32,13 +31,18 @@ class LoginForm (FlaskForm):
 
 class PostForm(FlaskForm):
      mensagem = StringField('Faça um Post', validators=[DataRequired()])
+     img = FileField()
      btnSubmit = SubmitField()
+     
 
      def save(self, user_id):
-        post = Post (
-             mensagem=self.mensagem.data,
-             user_id=user_id
-        )
+        if self.img.data:
+            
+            post = Post(
+                mensagem=self.mensagem.data,
+                img=self.img.data.read(),
+                user_id=user_id
+            )
         db.session.add(post)
         db.session.commit()
 
@@ -87,12 +91,18 @@ class UnfollowForm(FlaskForm):
 
 class ComunidadeForm(FlaskForm):
      nome = StringField('Nome da Comunidade', validators=[DataRequired()])
+     capa = FileField()
+     banner = FileField()
      btnSubmit = SubmitField('Criar')
+     
 
      def save(self, criador_id):
         post = Comunidade (
              nome=self.nome.data,
+             capa=self.capa.data.read(),
+             banner=self.capa.data.read(),
              criador_id=criador_id
+             
         )
         db.session.add(post)
         db.session.commit()

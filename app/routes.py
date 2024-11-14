@@ -1,11 +1,11 @@
-from flask import render_template, redirect, url_for, flash, request, jsonify
+from flask import render_template, redirect, url_for, flash, request, jsonify, Response
 from app import app
 from sqlalchemy import Select
 from app.models import User, Post, PostComentarios, Followers, Comunidade,Follow_comunidade, Like
 from app.form import CadastroForm, LoginForm, PostForm, PostComentarioForm, FollowForm, UnfollowForm, LikeForm, ComunidadeForm,PostComunidadeForm, FollowComunidadeForm
 from app import db
 from flask_login import login_user, current_user, login_required, logout_user
-from sqlalchemy import select
+from sqlalchemy import select, update
 from datetime import datetime
 from operator import attrgetter
 
@@ -215,5 +215,36 @@ def unfollow_comunidade(id):
           db.session.delete(unfollow)
           db.session.commit()
           return redirect('/comunidade/'+str(comunidade.id))
+
+@app.route('/imagem/<int:id>')
+def post_img(id):
+    post = Post.query.filter_by(id=id).first()
+    img = post.img
+    
+    return Response(img, mimetype='PNG')
+
+@app.route('/comunidade/banner/<int:id>')
+def com_banner_img(id):
+    comunidade = Comunidade.query.filter_by(id=id).first()
+    img = comunidade.banner
+    
+    return Response(img, mimetype='PNG')
+
+@app.route('/comunidade/capa/<int:id>')
+def com_capa_img(id):
+    comunidade = Comunidade.query.filter_by(id=id).first()
+    img = comunidade.capa
+    
+    return Response(img, mimetype='PNG')
+
+@app.route('/user/<int:id>/changepfp', methods=['GET', 'POST'])
+@login_required
+def ChangePFP(id):
+    post = Post.query.get(id)
+    user = db.session.query(User).filter(User.id==Post.user_id,Post.id==post.id).first()
+    unfollow = db.session.query(Like).filter(Like.user_id==current_user.id,Like.post_id==post.id).first()
+    db.session.delete(unfollow)
+    db.session.commit()
+    return redirect('/user/'+str(user.usuario))
 
     

@@ -35,11 +35,17 @@
 
 
 <div class="container border">
-        <form method="POST" class="form-signin" style="color:whitesmoke">
+        <form method="POST" enctype="multipart/form-data" class="form-signin" style="color:whitesmoke">
             {{form.csrf_token}}
 
             {{form.nome.label()}}
             {{form.nome(class="form-control")}}
+
+            {{form.capa.label()}}
+            {{form.capa(class="form-control")}}
+
+            {{form.banner.label()}}
+            {{form.banner(class="form-control")}}
          <div class="left">
             {{form.btnSubmit(class="btn btn-primary btn-sm mt-3")}}
             </div>
