@@ -8,10 +8,11 @@
 
 <div class="right">
 <br>
-  <center><a class="btn btn-lg btn-primary" href="{{url_for('comunidades_criar')}}">criar comunidade</a><center>
+  <a class="bottom-right-button" href="{{url_for('comunidades_criar')}}">criar comunidade</a>
 <br>
 {% for i in comunidades %}
-<a style="color:white; text-decoration: none;" href="/comunidade/{{i.id}}">{{i.nome}}</a>
+<center>
+<a class="resumo" style="color:white; text-decoration: none;" href="/comunidade/{{i.id}}">{{i.nome}}</a></center>
 <hr>
 {% endfor %}
 </div>
@@ -26,6 +27,33 @@
   justify-content: space-around;
   width: 300px;
 }      
+
+.bottom-right-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 10px 20px;
+  background-color: #008CBA;
+  color: white;
+  border-radius: 50px;
+  text-decoration: none;
+}
+
+.bottom-right-button:hover {
+  background-color: #005f6a;
+}
+
+.resumo {
+   overflow: hidden;
+   word-wrap: break-word;
+   word-break: break-all;
+   text-overflow: ellipsis;
+   display: -webkit-box;
+   -webkit-box-orient: vertical;
+   -webkit-line-clamp: 3;
+   height: 20px;
+   width: 500px;
+}
 </style>
 
 {% endblock %}

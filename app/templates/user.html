@@ -13,9 +13,9 @@
     <img class="container-img" src='/user/{{user.usuario}}/banner'>
 </div>
 <div>
-    <img style="position: absolute;" class="pfp" src='/user/{{user.usuario}}/profile'>
-    <h1 style="border: solid;" src='/user/{{user.usuario}}/profile' class="wapol">{{ user.usuario }} {{ flwcount }} seguidores</h1>
-
+    <img style="position: absolute; top: 450px; margin-left: 15px; z-index: -1; " class="pfp" src='/user/{{user.usuario}}/profile'>
+    <h1 style="margin-left: 50px; margin-top: 50px;" src='/user/{{user.usuario}}/profile' class="wapol">{{ user.usuario }} </h1>
+    <b style="margin-left: 150px;">{{ flwcount }} seguidores</b>
 </div>
     {% if current_user.is_authenticated %}
     <div class="">
@@ -29,23 +29,27 @@
                 </form>
                 {% endif %}
             {% else %}
-            <a  style="border: solid; padding-top: 100px;" class="btn btn-lg btn-danger" href="/user/{{user.usuario}}/changepfp">Mudar pfp</a>
-            <a  style="border: solid; padding-top: 100px;" class="btn btn-lg btn-danger" href="/user/{{user.usuario}}/changebanner">Mudar Banner</a>
+            <br>
+            <br>
+            <a  style="color: white;" class="btn btn-lg shadow preto" href="/user/{{user.usuario}}/changepfp">Mudar foto de perfil</a>
+            <a  style="color: white;" class="btn btn-lg shadow preto" href="/user/{{user.usuario}}/changebanner">Mudar Banner</a>
             {% endif %}
         </small>
     </div>
     {% endif %}
     
     <hr>
+    <div>
     {% if posts != null %}
         {% for post in posts %}
         <p>
             {{ user.usuario }}: <a style="word-break:break-all; word-wrap:break-word; color:white; text-decoration: none;" href="/post/{{post.id}}">{{ post.mensagem }}</a>
             {% if post.isliked(current_user.id) != False %}
-            <a class="btn btn-lg btn-danger" href="/post/{{post.id}}/dislike">DISLIKE</a>
-                  
+            <a href="/post/{{post.id}}/dislike">
+            <input type="image" src ="../static/like.png">  </a>
             {% else %}
-            <a class="btn btn-lg btn-danger" href="/post/{{post.id}}/like">LIKE</a>
+            <a href="/post/{{post.id}}/like">
+            <input type="image" src ="../static/deslike3.png"></a>
             {% endif %}
             {{post.like_count()}}
         </p>
@@ -65,20 +69,31 @@
 
 
  .container-img {
-  max-width: 1600px;
+  max-width: 1317px;
   max-height: 400px;
-  min-width: 1358px;
+  min-width: 1317px;
   min-height: 400px;
 }
 
 .pfp {
-   border: solid ;
+   border: solid black;
    max-width: 120px;
    max-height: 120px;
    min-width: 120px;
    min-height: 120px;
    border-radius: 60px;
 }
+
+.preto
+{
+    background-color: transparent;
+}
+
+.preto:hover{
+    background-color: gray;
+}
+
+
 </style>
 
 

@@ -10,56 +10,75 @@
 <div class="💔"></div>
 
     <div class="row mt-4">
-<h3></h3>
+
     </div>
 
     <div>
         <div>
             <a class="btn btn-lg china" href="{{url_for('ForYou')}}"> ⬅️</a>
             </div>
-        <div class="container ">
-            <center><div class="col-7 p-4 shadow b">
+        <center><div class="container ">
+            <div style="padding-top: 20px;"">
+                <img class="pfp" src="/user/{{users[post.user_id-1].usuario}}/profile" alt="Foto de Perfil">
+            <a class="post2" style="text-decoration: none; color:white; margin-right: 600px;" href="/user/{{users[post.user_id-1].usuario}}">{{users[post.user_id-1].usuario}}</a>
+        </div>
+            <div class="col-7 p-4 shadow b">
                         {{post.mensagem}}
-                        <img src='/imagem/{{post.id}}'>
-                    </div>
-            <div class="right">
-            <br>
-            {{post.like_count()}}
-            {% if isliked != False %}
-            <a class="btn btn-danger" href="/post/{{post.id}}/dislike">DISLIKE</a>
-                
-            {% else %}
-            <a class="btn btn-danger" href="/post/{{post.id}}/like">LIKE</a>
-            {% endif %}
-            </div>
-            </div>
-        </div><center>
+                        {% if post.img != None %}
+                        <img src='../imagem/{{post.id}}'>
+                        {% endif %}
+                    </div></center>
+                    
+        </div>
+            <center><div class="heart">
+                <br>
+                {{post.like_count()}}
+                {% if isliked != False %}
+                <a href="/post/{{post.id}}/dislike">
+                    <input type="image" src ="../static/like.png">  </a>
+                    
+                {% else %}
+                <a href="/post/{{post.id}}/like">
+                    <input type="image" src ="../static/deslike3.png"></a>
+                {% endif %}
+                </div>
+                </div>
             
-            <div class="col-6 mt-3 shadow p-3 b">
-            <form action="" method="post" class="row p-3 ">
+            <div class="col-6 mt-3 shadow p-3 ">
+            <form action="" method="post" class="row p-3">
                 {{form.csrf_token}}
                 Comentar
                 {{form.comentario(class="form_control")}}
     
                 {{form.btnSubmit(class="btn btn-primary col-12 mt-3")}}
             </form>
-        </div>
+        </div></center>
 
 
 
             {% for c in post.comentarios %}
-            <p>
-                <div class=" right col-6 mt-4 border rounded shadow p-3 b">
+
+                <center><div class=" col-6 mt-4 border rounded shadow p-3 b">
                 <!-- <b>Usuario: </b> --> <a style="color:white; text-decoration: none;" href="/user/{{users[c.user_id-1].usuario}}">{{users[c.user_id-1].usuario}}</a><br>
                 <hr class="e">
                 {{c.comentario}}
-                </div>
-            </p>
+
+                </div></center>
+
             {% endfor %}
         </div>
     </div>
 
     <style>
+
+.pfp {
+   border: solid black;
+   max-width: 60px;
+   max-height: 60px;
+   min-width: 60px;
+   min-height: 60px;
+   border-radius: 60px;
+}
         .china{
            position: absolute;
         }
@@ -118,7 +137,13 @@
     left: 500px;
     position: absolute;
 }
-       </style>
+
+.heart{
+    position: static;
+    margin-right: 600px;
+    width: 10%;
+}
+</style>
 
 
 {% endblock %}

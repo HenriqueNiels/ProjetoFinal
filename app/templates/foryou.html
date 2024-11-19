@@ -14,47 +14,54 @@
 <div class="brutal"></div>
 <div class="💔"></div>
 <div class="container">
-        <form method="post" enctype="multipart/form-data" class="form-signin" style="color:whitesmoke"> 
+        <form method="post" enctype="multipart/form-data"  class="form-signin" style="color:whitesmoke"> 
 
             {{form.csrf_token}}
          
             {{form.mensagem.label()}}
             
-            {{form.mensagem(class="form-control")}}
-            {{form.img.label()}}
-            {{form.img(class="form-control")}}
-               
+            {{form.mensagem(class="form-control")}} 
+   </div>
+</form>
+
+<div class="shadow-box" onclick="toggleDiv()">
+   <img style="width: 23%;" src ="../static/image.png">
+</div>
+
+<div id="targetDiv" class="hidden-div" >
+   {{form.img.label()}}
+   {{form.img(class="form-control")}}
 </div>
 
       <div class="vr" style="color:rgb(1, 23, 47);"></div>
 
     <center><table class="item">
       {% if posts != null %}
-      <th class="penis">{% for post in posts %}
-         <p>
-            <div class="post2" style="text-decoration: none;" href="/user/{{users[post.user_id-1].usuario}} left">{{users[post.user_id-1].usuario}}</div>
-            <div class="bosta volta_comigo_camile"></div>
+      <th>{% for post in posts %}
+            
+            <a class="post2" style="text-decoration: none; color:white;" href="/user/{{users[post.user_id-1].usuario}}">{{users[post.user_id-1].usuario}}</a>
                <div class="post BotLane ">
                   <a style="color:white; text-decoration: none;" href="/post/{{post.id}}">{{post.msg_resumo()}}</a>
                   {% if post.img != None %}
                   <div>
                   <center><img class ='postimg'src='../imagem/{{post.id}}'></center>
-                  </div>
+               </div>
                   
                   {% endif %}
                </div>
-
+               <div>
                {{post.like_count()}}
                {% if post.isliked(current_user.id) != False %}
                <a href="/post/{{post.id}}/dislike">
-               <input type="image" src ="static/like.png">  </a>
+               <input type="image" src ="../static/like.png">  </a>
                   
                {% else %}
                <a href="/post/{{post.id}}/like">
-               <input type="image" src ="static/deslike3.png"></a>
+               <input type="image" src ="../static/deslike3.png"></a>
+            
                {% endif %}
-            </div> 
-         </p>
+            </div>
+         </div>
          <hr>
       {% endfor %}</th>
    {% endif %}
@@ -67,29 +74,30 @@
    <aside class="flex flex-col py-md box-border right">
       <aside class="bg-neutral-background-weak rounded-[8px] pb-2xs pt-xs mb-md" >
 
-         <div>
+         <div class="center tras">
             <h3 class="w3-bar-item">Comunidades em alta</h3>
+            <br>
             {% if qtd_comunidades >= 3 %}
             <img class='postcomuna'src='../comunidade/capa/{{comunidades[0].id}}'>
-            <a href="/comunidade/{{comunidades[0].id}}" class="resumo border comunatxt w3-bar-item w3-button" style="color:white; text-decoration: none; z-index: -2;">{{comunidades[0].nome}}</a>
+            <a href="/comunidade/{{comunidades[0].id}}" class="resumo  comunatxt w3-bar-item w3-button" style="color:white; text-decoration: none; z-index: -2;">{{comunidades[0].nome}}</a>
             <br>
             <br>
             <img class='postcomuna'src='../comunidade/capa/{{comunidades[1].id}}'>
-            <a href="/comunidade/{{comunidades[1].id}}" class="border resumo w3-bar-item w3-button" style="color:white; text-decoration: none; z-index: -2;">{{comunidades[1].nome}}</a>
+            <a href="/comunidade/{{comunidades[1].id}}" class=" resumo w3-bar-item w3-button" style="color:white; text-decoration: none; z-index: -2;">{{comunidades[1].nome}}</a>
             <br>
             <br>
             <img class='postcomuna'src='../comunidade/capa/{{comunidades[2].id}}'>
-            <a href="/comunidade/{{comunidades[2].id}}" class=" border resumo w3-bar-item w3-button" style="color:white; text-decoration: none; z-index: -200;">{{comunidades[2].nome}}</a>
+            <a href="/comunidade/{{comunidades[2].id}}" class="  resumo w3-bar-item w3-button" style="color:white; text-decoration: none; z-index: -200;">{{comunidades[2].nome}}</a>
             {% elif qtd_comunidades == 2 %}
             <img class='postcomuna'src='../comunidade/capa/{{comunidades[0].id}}'>
-            <a href="/comunidade/{{comunidades[0].id}}" class="resumo border comunatxt w3-bar-item w3-button" style="color:white; text-decoration: none; z-index: -2;">{{comunidades[0].nome}}</a>
+            <a href="/comunidade/{{comunidades[0].id}}" class="resumo  comunatxt w3-bar-item w3-button" style="color:white; text-decoration: none; z-index: -2;">{{comunidades[0].nome}}</a>
             <br>
             <br>
             <img class='postcomuna'src='../comunidade/capa/{{comunidades[1].id}}'>
-            <a href="/comunidade/{{comunidades[1].id}}" class="border resumo w3-bar-item w3-button" style="color:white; text-decoration: none; z-index: -2;">{{comunidades[1].nome}}</a>
+            <a href="/comunidade/{{comunidades[1].id}}" class=" resumo w3-bar-item w3-button" style="color:white; text-decoration: none; z-index: -2;">{{comunidades[1].nome}}</a>
             {% elif qtd_comunidades == 1 %}
             <img class='postcomuna'src='../comunidade/capa/{{comunidades[0].id}}'>
-            <a href="/comunidade/{{comunidades[0].id}}" class="resumo border comunatxt w3-bar-item w3-button" style="color:white; text-decoration: none; z-index: -2;">{{comunidades[0].nome}}</a>
+            <a href="/comunidade/{{comunidades[0].id}}" class="resumo  comunatxt w3-bar-item w3-button" style="color:white; text-decoration: none; z-index: -2;">{{comunidades[0].nome}}</a>
             {% elif qtd_comunidades == 0 %}
 
             {% endif %}
@@ -104,9 +112,7 @@
       left: 10px;
    }
 
-.Penis{
-   width: 40%;
-}
+
 
    .volta{ 
   left: 10px;
@@ -126,21 +132,13 @@
    border: 1px;
  }  
 
- .volta_comigo_larissa{
-   z-index: 1;
-   left: 50;
- }  
-
- .bosta {
-   width: 500px; 
-   height: 120px; 
-   border-radius: 0px; 
-   background-color: rgb(1, 23, 47); 
+.tras{
+   z-index: -1 !important ;
 }
 
  .container {
    width: 600px; 
-   height: 120px; 
+   height: 10px; 
    border-radius: 50px; 
    background-color: rgb(1, 23, 47); 
    padding-top: 30px;
@@ -153,10 +151,13 @@
 }
 
 .post2 {
-   width: 700px !important;
+   cursor: pointer;
+   width: 600px !important;
    height: 50px;
    position: static  ;
 }
+
+
 
 .postimg {
    max-width: 500px;
@@ -186,7 +187,6 @@
 
 .comunatxt{
    text-transform: uppercase;
-   text
 }
 
 .user {
@@ -288,25 +288,7 @@ div {
 body{
    zoom: 90%;
 }
-
-/* tentativa de Grid 1 */
-
-.grid- {
-  display: grid;
-  column-gap: 50px;
-  grid-template-columns: auto auto auto;
-  background-color: #2196F3;
-  padding: 10px;
-  padding-left: 30%;
-}
-
-.grid-item {
-  background-color: rgba(255, 255, 255, 0.8);
-  border: 1px solid rgba(0, 0, 0, 0.8);
-  padding: 20px;
-  font-size: 30px;
-  text-align: center;
-}
+   
 /* tentativa de grid 2*/
 
 .grid-container {
@@ -321,9 +303,36 @@ body{
   font-weight: normal;
 }
 
+/* ... que abre / que se foda o modal news */
 
+.shadow-box {
+   container: 100px;
+   margin-top: 15px;
+   margin-left: 350px;
+   margin-bottom: 50px;
+   padding-top: 5px;
+   width: 10%;
+   cursor: pointer;
+}
+
+.hidden-div {
+   display: none;
+   margin-left: 400px;
+   margin-right: 400px;
+   margin-bottom: 250px;
+}
 
 </style>
+<script>
+   function toggleDiv() {
+       const div = document.getElementById('targetDiv');
+       if (div.style.display === 'none' || div.style.display === '') {
+           div.style.display = 'block';
+       } else {
+           div.style.display = 'none';
+       }
+   }
+</script>
       
 </body>
 
